@@ -42,6 +42,24 @@ export default function Dashboard() {
         </div>
       </div>
 
+      {/* Quick Actions */}
+      <div className="card" style={{ marginBottom: 24, background: 'linear-gradient(135deg, var(--bg-card), var(--bg-elevated))', borderLeft: '4px solid var(--accent)' }}>
+        <h3 style={{ marginBottom: 16, fontSize: '1.1rem', display: 'flex', alignItems: 'center', gap: 8 }}>
+          <span style={{ color: 'var(--accent)' }}>⚡</span> Quick Actions
+        </h3>
+        <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
+          <a href="/ai-generator" className="btn btn-primary" style={{ padding: '12px 24px', borderRadius: 'var(--radius-lg)', background: 'linear-gradient(135deg, var(--purple), var(--accent))' }}>
+            ✨ AI Media Studio
+          </a>
+          <a href="/press-releases/new" className="btn btn-secondary" style={{ padding: '12px 24px', borderRadius: 'var(--radius-lg)' }}>
+            📝 New Press Release
+          </a>
+          <a href="/announcements/new" className="btn btn-secondary" style={{ padding: '12px 24px', borderRadius: 'var(--radius-lg)' }}>
+            📢 Broadcast Announcement
+          </a>
+        </div>
+      </div>
+
       {/* Stats Grid */}
       <div className="stats-grid">
         <StatCard label={t('dashboard.totalPressReleases')} value={totals.pressReleases} icon={<MdArticle />} color="accent" />

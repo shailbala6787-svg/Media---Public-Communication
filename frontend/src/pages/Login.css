@@ -1,0 +1,116 @@
+/* Login Page Premium Styles */
+
+.login-split-layout {
+  display: flex;
+  min-height: 100vh;
+  background: var(--bg-base);
+}
+
+.login-branding {
+  flex: 1;
+  background: linear-gradient(135deg, var(--bg-surface), var(--bg-elevated));
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px;
+  overflow: hidden;
+}
+
+@media (max-width: 900px) {
+  .login-branding {
+    display: none;
+  }
+}
+
+.branding-blob-1 {
+  position: absolute;
+  top: -100px;
+  left: -100px;
+  width: 400px;
+  height: 400px;
+  background: var(--accent);
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.15;
+  animation: pulse 8s infinite alternate;
+}
+
+.branding-blob-2 {
+  position: absolute;
+  bottom: -100px;
+  right: -100px;
+  width: 400px;
+  height: 400px;
+  background: var(--teal);
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.15;
+  animation: pulse 8s infinite alternate-reverse;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.1; }
+  100% { transform: scale(1.2); opacity: 0.2; }
+}
+
+.branding-content {
+  position: relative;
+  z-index: 10;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.login-form-container {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px;
+  background: var(--bg-card);
+  position: relative;
+  z-index: 10;
+  box-shadow: -20px 0 50px rgba(0,0,0,0.1);
+}
+
+.login-sop-section {
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px dashed var(--border);
+}
+
+.sop-links {
+  display: flex;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.sop-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all var(--transition);
+  flex: 1;
+  justify-content: center;
+}
+
+.sop-link:hover {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.sop-icon {
+  font-size: 16px;
+  color: var(--rose);
+}

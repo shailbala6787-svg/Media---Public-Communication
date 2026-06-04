@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { MdMenu, MdNotifications, MdSettings, MdLogout, MdPerson } from 'react-icons/md';
+import { MdMenu, MdNotifications, MdSettings, MdLogout, MdPerson, MdLightMode, MdDarkMode } from 'react-icons/md';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { useLang } from '../../context/LanguageContext.jsx';
 import LanguageToggle from '../UI/LanguageToggle.jsx';
@@ -25,6 +25,21 @@ export default function Header({ collapsed, onMobileMenu }) {
   const navigate = useNavigate();
   const [dropOpen, setDropOpen] = useState(false);
   const dropRef = useRef(null);
+  
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+
+  useEffect(() => {
+    if (theme === 'light') {
+      document.body.classList.add('light-theme');
+    } else {
+      document.body.classList.remove('light-theme');
+    }
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'light' ? 'dark' : 'light');
+  };
 
   const title = breadcrumbMap[location.pathname] ||
     (location.pathname.includes('/edit/') ? 'Edit' : 'Detail');
@@ -58,6 +73,10 @@ export default function Header({ collapsed, onMobileMenu }) {
       {/* Actions */}
       <div className="header-actions">
         <LanguageToggle />
+
+        <button className="header-btn" onClick={toggleTheme} title="Toggle Theme">
+          {theme === 'light' ? <MdDarkMode /> : <MdLightMode />}
+        </button>
 
         <button className="header-btn" title="Notifications">
           <MdNotifications />
