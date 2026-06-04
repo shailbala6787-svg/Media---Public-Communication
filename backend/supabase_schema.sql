@@ -78,7 +78,7 @@ CREATE TABLE public.media_items (
 -- Bcrypt hash for 'password123': $2a$10$tZ92E.Y09CqL8W/7m69LKe3s84P1RkYjO.uC61R0Y9P7j2O0e0SZi
 INSERT INTO public.users (id, name, email, password, role, is_active)
 VALUES (
-    'd8a9e4b1-1b3c-4d5e-8f7g-9h0i1j2k3l4m',
+    'd8a9e4b1-1b3c-4d5e-8f7f-9f0a1b2c3d4e',
     'Admin User', 
     'admin@example.com', 
     '$2a$10$tZ92E.Y09CqL8W/7m69LKe3s84P1RkYjO.uC61R0Y9P7j2O0e0SZi', 
@@ -94,7 +94,7 @@ VALUES (
     'We are excited to announce our upcoming annual tech conference. It will feature industry leaders and cutting-edge innovations.', 
     'Technology', 
     'published', 
-    'd8a9e4b1-1b3c-4d5e-8f7g-9h0i1j2k3l4m',
+    'd8a9e4b1-1b3c-4d5e-8f7f-9f0a1b2c3d4e',
     ARRAY['tech', 'conference', '2026']
 );
 

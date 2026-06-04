@@ -18,6 +18,7 @@ import AnnouncementForm from './pages/AnnouncementForm.jsx';
 import Contacts from './pages/Contacts.jsx';
 import ContactForm from './pages/ContactForm.jsx';
 import UserManagement from './pages/UserManagement.jsx';
+import AIContentGenerator from './pages/AIContentGenerator.jsx';
 
 const ProtectedRoute = ({ children, adminOnly = false }) => {
   const { user, loading } = useAuth();
@@ -57,6 +58,7 @@ export default function App() {
           <Route path="announcements/edit/:id" element={<AnnouncementForm />} />
           <Route path="contacts" element={<Contacts />} />
           <Route path="contacts/:id" element={<ContactForm />} />
+          <Route path="ai-generator" element={<AIContentGenerator />} />
           <Route path="users" element={<ProtectedRoute adminOnly><UserManagement /></ProtectedRoute>} />
         </Route>
 

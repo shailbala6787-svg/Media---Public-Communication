@@ -21,6 +21,7 @@ app.use('/api/announcements', require('./routes/announcements'));
 app.use('/api/contacts', require('./routes/contacts'));
 app.use('/api/dashboard', require('./routes/dashboard'));
 app.use('/api/users', require('./routes/users'));
+app.use('/api/ai', require('./routes/ai'));
 
 app.get('/', (req, res) => res.json({ message: 'Media & Public Communication API running (Supabase)' }));
 

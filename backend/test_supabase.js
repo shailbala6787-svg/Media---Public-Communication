@@ -4,7 +4,7 @@ require('dotenv').config({ path: './.env' });
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
 
 async function check() {
-  const tables = ['users', 'press_releases', 'public_notices', 'announcements', 'contacts', 'media'];
+  const tables = ['users', 'press_releases', 'public_notices', 'announcements', 'contacts', 'media_items'];
   for (const table of tables) {
     const { data, error } = await supabase.from(table).select('*').limit(1);
     if (error) {

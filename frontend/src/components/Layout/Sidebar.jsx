@@ -21,6 +21,7 @@ const navItems = [
       { path: '/public-notices', icon: <MdAnnouncement />, key: 'nav.publicNotices' },
       { path: '/media', icon: <MdPermMedia />, key: 'nav.mediaGallery' },
       { path: '/announcements', icon: <RiMegaphoneLine />, key: 'nav.announcements' },
+      { path: '/ai-generator', icon: <MdCampaign />, key: 'AI Content Generator' },
     ]
   },
   {
