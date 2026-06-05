@@ -50,7 +50,7 @@ export default function Login() {
       <div className="login-branding">
         <div className="branding-blob-1"></div>
         <div className="branding-blob-2"></div>
-        
+
         <div className="branding-content animate-fade-in">
           <div style={{ width: 80, height: 80, background: 'linear-gradient(135deg, var(--accent), var(--purple))', borderRadius: 'var(--radius-lg)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 40, marginBottom: 32, boxShadow: 'var(--shadow-glow)' }}>
             <FaShieldAlt style={{ color: 'white' }} />
@@ -69,14 +69,14 @@ export default function Login() {
       <div className="login-form-container">
         <div style={{ position: 'absolute', top: 24, right: 24, display: 'flex', gap: 8, alignItems: 'center' }}>
           <LanguageToggle />
-          <button 
-            onClick={toggleTheme} 
+          <button
+            onClick={toggleTheme}
             title="Toggle Theme"
-            style={{ 
-              width: 38, height: 38, borderRadius: 'var(--radius)', 
-              border: '1px solid var(--border)', background: 'var(--bg-card)', 
-              color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', 
-              justifyContent: 'center', fontSize: 18, cursor: 'pointer', transition: 'all var(--transition)' 
+            style={{
+              width: 38, height: 38, borderRadius: 'var(--radius)',
+              border: '1px solid var(--border)', background: 'var(--bg-card)',
+              color: 'var(--text-secondary)', display: 'flex', alignItems: 'center',
+              justifyContent: 'center', fontSize: 18, cursor: 'pointer', transition: 'all var(--transition)'
             }}
             onMouseEnter={e => { e.currentTarget.style.background = 'var(--accent-dim)'; e.currentTarget.style.borderColor = 'var(--accent)'; e.currentTarget.style.color = 'var(--accent)'; }}
             onMouseLeave={e => { e.currentTarget.style.background = 'var(--bg-card)'; e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = 'var(--text-secondary)'; }}
