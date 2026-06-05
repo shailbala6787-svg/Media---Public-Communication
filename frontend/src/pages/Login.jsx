@@ -18,10 +18,10 @@ export default function Login() {
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
 
   useEffect(() => {
-    if (theme === 'light') {
-      document.body.classList.add('light-theme');
+    if (theme === 'dark') {
+      document.body.classList.add('dark-theme');
     } else {
-      document.body.classList.remove('light-theme');
+      document.body.classList.remove('dark-theme');
     }
     localStorage.setItem('theme', theme);
   }, [theme]);
@@ -133,6 +133,12 @@ export default function Login() {
                   required
                 />
               </div>
+            </div>
+            
+            <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 16 }}>
+              <Link to="/forgot-password" style={{ fontSize: 14, color: 'var(--accent)', fontWeight: 600, textDecoration: 'none' }}>
+                Forgot Password?
+              </Link>
             </div>
 
             <button
