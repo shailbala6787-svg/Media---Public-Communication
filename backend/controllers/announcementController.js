@@ -1,6 +1,6 @@
 const { supabase } = require('../config/supabase');
 
-const mapId = (d) => ({ ...d, _id: d.id });
+const mapId = (d) => ({ ...d, _id: d.id, body: d.content, targetAudience: d.target_audience, expiresAt: d.expires_at, scheduledAt: d.scheduled_at });
 
 exports.getAnnouncements = async (req, res) => {
   try {
@@ -36,9 +36,15 @@ exports.getAnnouncement = async (req, res) => {
 
 exports.createAnnouncement = async (req, res) => {
   try {
+    const insertData = { ...req.body };
+    if (insertData.body !== undefined) { insertData.content = insertData.body; delete insertData.body; }
+    if (insertData.targetAudience !== undefined) { insertData.target_audience = insertData.targetAudience; delete insertData.targetAudience; }
+    if (insertData.expiresAt !== undefined) { insertData.expires_at = insertData.expiresAt || null; delete insertData.expiresAt; }
+    if (insertData.scheduledAt !== undefined) { insertData.scheduled_at = insertData.scheduledAt || null; delete insertData.scheduledAt; }
+
     const { data, error } = await supabase
       .from('announcements')
-      .insert([req.body])
+      .insert([insertData])
       .select()
       .single();
 
@@ -51,9 +57,15 @@ exports.createAnnouncement = async (req, res) => {
 
 exports.updateAnnouncement = async (req, res) => {
   try {
+    const updateData = { ...req.body };
+    if (updateData.body !== undefined) { updateData.content = updateData.body; delete updateData.body; }
+    if (updateData.targetAudience !== undefined) { updateData.target_audience = updateData.targetAudience; delete updateData.targetAudience; }
+    if (updateData.expiresAt !== undefined) { updateData.expires_at = updateData.expiresAt || null; delete updateData.expiresAt; }
+    if (updateData.scheduledAt !== undefined) { updateData.scheduled_at = updateData.scheduledAt || null; delete updateData.scheduledAt; }
+
     const { data, error } = await supabase
       .from('announcements')
-      .update(req.body)
+      .update(updateData)
       .eq('id', req.params.id)
       .select()
       .single();

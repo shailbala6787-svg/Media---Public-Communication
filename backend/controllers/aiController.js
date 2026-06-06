@@ -24,7 +24,7 @@ exports.generateContent = async (req, res) => {
     const genAI = new GoogleGenerativeAI(apiKey);
     
     // Using gemini-1.5-pro for complex structured generation
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro-latest" }, { apiVersion: "v1beta" });
+    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" }, { apiVersion: "v1beta" });
 
     const prompt = `
 You are UP Police official media officer. Generate content.

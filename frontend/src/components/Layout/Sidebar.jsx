@@ -6,6 +6,7 @@ import {
 } from 'react-icons/md';
 import { RiMegaphoneLine } from 'react-icons/ri';
 import { useLang } from '../../context/LanguageContext.jsx';
+import { useAuth } from '../../context/AuthContext.jsx';
 
 const navItems = [
   {
@@ -41,6 +42,7 @@ const sectionLabels = {
 
 export default function Sidebar({ collapsed, mobileOpen, onToggle, onMobileClose }) {
   const { t } = useLang();
+  const { user } = useAuth();
   const location = useLocation();
 
   return (
@@ -56,12 +58,21 @@ export default function Sidebar({ collapsed, mobileOpen, onToggle, onMobileClose
 
       {/* Nav */}
       <nav className="sidebar-nav">
-        {navItems.map(({ section, items }) => (
+        {navItems.map(({ section, items }) => {
+          const filteredItems = items.filter(item => {
+            if (item.path === '/ai-generator' && user?.role === 'viewer') return false;
+            if (item.path === '/users' && user?.role !== 'admin') return false;
+            return true;
+          });
+
+          if (filteredItems.length === 0) return null;
+
+          return (
           <div key={section}>
             {sectionLabels[section] && (
               <div className="nav-section-label">{sectionLabels[section]}</div>
             )}
-            {items.map(({ path, icon, key, exact }) => (
+            {filteredItems.map(({ path, icon, key, exact }) => (
               <NavLink
                 key={path}
                 to={path}
@@ -75,7 +86,8 @@ export default function Sidebar({ collapsed, mobileOpen, onToggle, onMobileClose
               </NavLink>
             ))}
           </div>
-        ))}
+          );
+        })}
       </nav>
 
       {/* Footer toggle */}

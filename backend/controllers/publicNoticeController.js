@@ -1,6 +1,6 @@
 const { supabase } = require('../config/supabase');
 
-const mapId = (d) => ({ ...d, _id: d.id });
+const mapId = (d) => ({ ...d, _id: d.id, description: d.content, noticeNumber: d.notice_number, isPublic: d.is_public });
 
 exports.getPublicNotices = async (req, res) => {
   try {
@@ -36,9 +36,16 @@ exports.getPublicNotice = async (req, res) => {
 exports.createPublicNotice = async (req, res) => {
   try {
     const attachmentUrl = req.file ? `/uploads/${req.file.filename}` : null;
+    
+    const insertData = { ...req.body };
+    if (insertData.description !== undefined) { insertData.content = insertData.description; delete insertData.description; }
+    if (insertData.noticeNumber !== undefined) { insertData.notice_number = insertData.noticeNumber; delete insertData.noticeNumber; }
+    if (insertData.isPublic !== undefined) { insertData.is_public = insertData.isPublic === 'true' || insertData.isPublic === true; delete insertData.isPublic; }
+    if (attachmentUrl) insertData.attachment_url = attachmentUrl;
+
     const { data, error } = await supabase
       .from('public_notices')
-      .insert([{ ...req.body, attachment_url: attachmentUrl }])
+      .insert([insertData])
       .select()
       .single();
 
@@ -51,9 +58,14 @@ exports.createPublicNotice = async (req, res) => {
 
 exports.updatePublicNotice = async (req, res) => {
   try {
+    const updateData = { ...req.body };
+    if (updateData.description !== undefined) { updateData.content = updateData.description; delete updateData.description; }
+    if (updateData.noticeNumber !== undefined) { updateData.notice_number = updateData.noticeNumber; delete updateData.noticeNumber; }
+    if (updateData.isPublic !== undefined) { updateData.is_public = updateData.isPublic === 'true' || updateData.isPublic === true; delete updateData.isPublic; }
+
     const { data, error } = await supabase
       .from('public_notices')
-      .update(req.body)
+      .update(updateData)
       .eq('id', req.params.id)
       .select()
       .single();

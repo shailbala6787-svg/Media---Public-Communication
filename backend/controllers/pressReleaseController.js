@@ -55,7 +55,7 @@ exports.getPressRelease = async (req, res) => {
 exports.createPressRelease = async (req, res) => {
   try {
     const attachments = req.files ? req.files.map(f => `/uploads/${f.filename}`) : [];
-    const tags = req.body.tags ? req.body.tags.split(',').map(t => t.trim()) : [];
+    const tags = req.body.tags && req.body.tags.trim() ? req.body.tags.split(',').map(t => t.trim()).filter(t => t) : [];
     
     const { data, error } = await supabase
       .from('press_releases')
@@ -82,8 +82,8 @@ exports.createPressRelease = async (req, res) => {
 exports.updatePressRelease = async (req, res) => {
   try {
     const updateData = { ...req.body };
-    if (updateData.tags && typeof updateData.tags === 'string') {
-      updateData.tags = updateData.tags.split(',').map(t => t.trim());
+    if (typeof updateData.tags === 'string') {
+      updateData.tags = updateData.tags.trim() ? updateData.tags.split(',').map(t => t.trim()).filter(t => t) : [];
     }
 
     const { data, error } = await supabase

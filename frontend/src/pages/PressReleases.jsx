@@ -5,6 +5,7 @@ import { MdAdd, MdEdit, MdDelete, MdSearch, MdVisibility } from 'react-icons/md'
 import Table, { Pagination } from '../components/UI/Table.jsx';
 import { ConfirmModal } from '../components/UI/Modal.jsx';
 import { useLang } from '../context/LanguageContext.jsx';
+import { useAuth } from '../context/AuthContext.jsx';
 
 const statusColors = { draft: 'badge-neutral', published: 'badge-success', archived: 'badge-warning' };
 const categoryColors = { General: 'badge-info', Policy: 'badge-purple', Event: 'badge-teal', Achievement: 'badge-success', Emergency: 'badge-danger', Other: 'badge-neutral' };
@@ -12,6 +13,7 @@ const fmtDate = (d) => d ? new Date(d).toLocaleDateString('en-IN', { day: '2-dig
 
 export default function PressReleases() {
   const { t } = useLang();
+  const { user } = useAuth();
   const navigate = useNavigate();
   const [items, setItems] = useState([]);
   const [total, setTotal] = useState(0);
@@ -54,7 +56,7 @@ export default function PressReleases() {
     { key: 'author', label: t('common.author'), render: (v) => v?.name || '—' },
     { key: 'views', label: 'Views', render: (v) => <span style={{ color: 'var(--text-muted)' }}>{v}</span> },
     { key: 'createdAt', label: t('common.date'), render: (v) => <span style={{ color: 'var(--text-muted)', fontSize: 12 }}>{fmtDate(v)}</span> },
-    {
+    ...(user?.role !== 'viewer' ? [{
       key: '_id', label: t('common.actions'), width: '120px',
       render: (v) => (
         <div style={{ display: 'flex', gap: 6 }}>
@@ -62,7 +64,7 @@ export default function PressReleases() {
           <button className="btn btn-danger btn-sm btn-icon" title="Delete" onClick={() => setDeleteId(v)}><MdDelete size={15} /></button>
         </div>
       )
-    }
+    }] : [])
   ];
 
   return (
@@ -72,7 +74,9 @@ export default function PressReleases() {
           <h1 className="page-title">{t('pressReleases.title')}</h1>
           <p className="page-subtitle">{t('pressReleases.subtitle')}</p>
         </div>
-        <Link to="/press-releases/new" className="btn btn-primary"><MdAdd size={18} />{t('pressReleases.addNew')}</Link>
+        {user?.role !== 'viewer' && (
+          <Link to="/press-releases/new" className="btn btn-primary"><MdAdd size={18} />{t('pressReleases.addNew')}</Link>
+        )}
       </div>
 
       <div className="filter-bar">

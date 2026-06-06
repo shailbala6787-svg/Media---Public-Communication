@@ -5,6 +5,7 @@ import { MdAdd, MdEdit, MdDelete, MdSearch } from 'react-icons/md';
 import Table, { Pagination } from '../components/UI/Table.jsx';
 import { ConfirmModal } from '../components/UI/Modal.jsx';
 import { useLang } from '../context/LanguageContext.jsx';
+import { useAuth } from '../context/AuthContext.jsx';
 
 const statusColors = { active: 'badge-success', expired: 'badge-warning', draft: 'badge-neutral' };
 const priorityColors = { low: 'badge-info', medium: 'badge-neutral', high: 'badge-warning', urgent: 'badge-danger' };
@@ -12,6 +13,7 @@ const fmtDate = (d) => d ? new Date(d).toLocaleDateString('en-IN', { day: '2-dig
 
 export default function PublicNotices() {
   const { t } = useLang();
+  const { user } = useAuth();
   const navigate = useNavigate();
   const [items, setItems] = useState([]);
   const [total, setTotal] = useState(0);
@@ -47,7 +49,7 @@ export default function PublicNotices() {
     { key: 'status', label: t('common.status'), render: (v) => <span className={`badge ${statusColors[v]}`}>{t(`publicNotices.status.${v}`)}</span> },
     { key: 'deadline', label: t('publicNotices.deadline'), render: (v) => <span style={{ color: 'var(--text-muted)', fontSize: 12 }}>{fmtDate(v)}</span> },
     { key: 'createdAt', label: t('common.date'), render: (v) => <span style={{ color: 'var(--text-muted)', fontSize: 12 }}>{fmtDate(v)}</span> },
-    {
+    ...(user?.role !== 'viewer' ? [{
       key: '_id', label: t('common.actions'), width: '120px',
       render: (v) => (
         <div style={{ display: 'flex', gap: 6 }}>
@@ -55,7 +57,7 @@ export default function PublicNotices() {
           <button className="btn btn-danger btn-sm btn-icon" onClick={() => setDeleteId(v)}><MdDelete size={15} /></button>
         </div>
       )
-    }
+    }] : [])
   ];
 
   return (
@@ -65,7 +67,9 @@ export default function PublicNotices() {
           <h1 className="page-title">{t('publicNotices.title')}</h1>
           <p className="page-subtitle">{t('publicNotices.subtitle')}</p>
         </div>
-        <Link to="/public-notices/new" className="btn btn-primary"><MdAdd size={18} />{t('publicNotices.addNew')}</Link>
+        {user?.role !== 'viewer' && (
+          <Link to="/public-notices/new" className="btn btn-primary"><MdAdd size={18} />{t('publicNotices.addNew')}</Link>
+        )}
       </div>
       <div className="filter-bar">
         <div className="search-input-wrap">

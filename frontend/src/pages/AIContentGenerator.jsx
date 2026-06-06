@@ -12,6 +12,20 @@ const platformIcons = {
   sms: <FaSms />
 };
 
+const upDistricts = [
+  "Agra", "Aligarh", "Ambedkar Nagar", "Amethi", "Amroha", "Auraiya", "Ayodhya", "Azamgarh", 
+  "Baghpat", "Bahraich", "Ballia", "Balrampur", "Banda", "Barabanki", "Bareilly", "Basti", 
+  "Bhadohi", "Bijnor", "Budaun", "Bulandshahr", "Chandauli", "Chitrakoot", "Deoria", "Etah", 
+  "Etawah", "Farrukhabad", "Fatehpur", "Firozabad", "Gautam Buddha Nagar", "Ghaziabad", 
+  "Ghazipur", "Gonda", "Gorakhpur", "Hamirpur", "Hapur", "Hardoi", "Hathras", "Jalaun", 
+  "Jaunpur", "Jhansi", "Kannauj", "Kanpur Dehat", "Kanpur Nagar", "Kasganj", "Kaushambi", 
+  "Kheri", "Kushinagar", "Lalitpur", "Lucknow", "Maharajganj", "Mahoba", "Mainpuri", 
+  "Mathura", "Mau", "Meerut", "Mirzapur", "Moradabad", "Muzaffarnagar", "Pilibhit", 
+  "Pratapgarh", "Prayagraj", "Raebareli", "Rampur", "Saharanpur", "Sambhal", 
+  "Sant Kabir Nagar", "Shahjahanpur", "Shamli", "Shravasti", "Siddharthnagar", "Sitapur", 
+  "Sonbhadra", "Sultanpur", "Unnao", "Varanasi"
+];
+
 export default function AIContentGenerator() {
   const [formData, setFormData] = useState({
     incident_type: '',
@@ -101,7 +115,18 @@ export default function AIContentGenerator() {
             <div className="form-row">
               <div className="form-group">
                 <label className="form-label">Incident Type</label>
-                <input required name="incident_type" value={formData.incident_type} onChange={handleInputChange} className="form-control" placeholder="e.g. Arrest, Rescue" />
+                <select required name="incident_type" value={formData.incident_type} onChange={handleInputChange} className="form-control">
+                  <option value="" disabled>Select Incident Type</option>
+                  <option value="Arrest">Arrest</option>
+                  <option value="Rescue">Rescue</option>
+                  <option value="Encounter">Encounter</option>
+                  <option value="Missing Person">Missing Person</option>
+                  <option value="Traffic Incident">Traffic Incident</option>
+                  <option value="Protest / Riot">Protest / Riot</option>
+                  <option value="Cyber Crime">Cyber Crime</option>
+                  <option value="Theft / Robbery">Theft / Robbery</option>
+                  <option value="Other">Other</option>
+                </select>
               </div>
               <div className="form-group">
                 <label className="form-label">Date</label>
@@ -112,7 +137,10 @@ export default function AIContentGenerator() {
             <div className="form-row">
               <div className="form-group">
                 <label className="form-label">District</label>
-                <input required name="district" value={formData.district} onChange={handleInputChange} className="form-control" placeholder="e.g. Lucknow" />
+                <select required name="district" value={formData.district} onChange={handleInputChange} className="form-control">
+                  <option value="" disabled>Select District</option>
+                  {upDistricts.map(d => <option key={d} value={d}>{d}</option>)}
+                </select>
               </div>
               <div className="form-group">
                 <label className="form-label">Location</label>

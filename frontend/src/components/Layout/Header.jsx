@@ -100,7 +100,7 @@ export default function Header({ collapsed, onMobileMenu }) {
               zIndex: 200, boxShadow: 'var(--shadow-lg)', animation: 'slideUp 0.15s ease'
             }}>
               <button
-                onClick={() => { setDropOpen(false); }}
+                onClick={() => { setDropOpen(false); navigate('/profile'); }}
                 style={{ display: 'flex', alignItems: 'center', gap: 10, width: '100%', padding: '9px 12px', borderRadius: 'var(--radius)', border: 'none', background: 'transparent', color: 'var(--text-secondary)', fontSize: 13, cursor: 'pointer' }}
                 onMouseEnter={e => e.currentTarget.style.background = 'var(--bg-elevated)'}
                 onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
@@ -108,7 +108,7 @@ export default function Header({ collapsed, onMobileMenu }) {
                 <MdPerson size={16} /> Profile
               </button>
               <button
-                onClick={() => { setDropOpen(false); }}
+                onClick={() => { setDropOpen(false); navigate('/settings'); }}
                 style={{ display: 'flex', alignItems: 'center', gap: 10, width: '100%', padding: '9px 12px', borderRadius: 'var(--radius)', border: 'none', background: 'transparent', color: 'var(--text-secondary)', fontSize: 13, cursor: 'pointer' }}
                 onMouseEnter={e => e.currentTarget.style.background = 'var(--bg-elevated)'}
                 onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
