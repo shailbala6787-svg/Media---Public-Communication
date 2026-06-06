@@ -86,7 +86,7 @@ export default function ForgotPassword() {
         
         <div className="branding-content animate-fade-in">
           <div style={{ marginBottom: 32 }}>
-          <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/UP_Police_Logo.png" alt="UP Police Logo" style={{ width: 80, height: 'auto', filter: 'drop-shadow(0 0 10px rgba(255,255,255,0.2))' }} />
+          <img src="/uppolice-logo.png" alt="UP Police Logo" style={{ width: 80, height: 'auto', filter: 'drop-shadow(0 0 10px rgba(255,255,255,0.2))' }} />
         </div>
           <h1 style={{ fontFamily: 'var(--font-display)', fontSize: '3rem', fontWeight: 800, lineHeight: 1.2, marginBottom: 16 }}>
             Password <br />

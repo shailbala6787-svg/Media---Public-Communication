@@ -50,7 +50,7 @@ export default function Sidebar({ collapsed, mobileOpen, onToggle, onMobileClose
       {/* Logo */}
       <div className="sidebar-logo">
         <div className="logo-icon" style={{ background: 'transparent', width: 36, height: 36 }}>
-          <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/UP_Police_Logo.png" alt="UP Police Logo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+          <img src="/uppolice-logo.png" alt="UP Police Logo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
         </div>
         <div className="logo-text">
           <div>Media &amp; <span>Public</span></div>
