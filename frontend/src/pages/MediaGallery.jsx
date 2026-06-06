@@ -89,7 +89,7 @@ export default function MediaGallery() {
             <div key={item._id} className="media-card">
               <div className="media-thumb">
                 {item.type === 'image' ? (
-                  <img src={item.url} alt={item.title} loading="lazy" />
+                  <img src={item.url?.startsWith('http') ? item.url : `${axios.defaults.baseURL || ''}${item.url}`} alt={item.title} loading="lazy" />
                 ) : (
                   iconMap[item.type] || <MdInsertDriveFile />
                 )}
@@ -97,7 +97,7 @@ export default function MediaGallery() {
               <div className="media-info">
                 <div className="media-title" title={item.title}>{item.title}</div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 8 }}>
-                  <div className="media-meta">{fmtDate(item.createdAt)} • {(item.size / 1024 / 1024).toFixed(1)}MB</div>
+                  <div className="media-meta">{fmtDate(item.createdAt || item.created_at)} • {(item.size / 1024 / 1024).toFixed(1)}MB</div>
                   <button className="btn btn-danger btn-sm btn-icon" onClick={() => setDeleteId(item._id)} style={{ padding: 4 }}>
                     <MdDelete size={14} />
                   </button>
