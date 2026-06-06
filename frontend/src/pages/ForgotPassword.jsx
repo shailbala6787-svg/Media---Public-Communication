@@ -85,9 +85,9 @@ export default function ForgotPassword() {
         <div className="branding-blob-2"></div>
         
         <div className="branding-content animate-fade-in">
-          <div style={{ width: 80, height: 80, background: 'linear-gradient(135deg, var(--accent), var(--purple))', borderRadius: 'var(--radius-lg)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 40, marginBottom: 32, boxShadow: 'var(--shadow-glow)' }}>
-            <FaShieldAlt style={{ color: 'white' }} />
-          </div>
+          <div style={{ marginBottom: 32 }}>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/UP_Police_Logo.png" alt="UP Police Logo" style={{ width: 80, height: 'auto', filter: 'drop-shadow(0 0 10px rgba(255,255,255,0.2))' }} />
+        </div>
           <h1 style={{ fontFamily: 'var(--font-display)', fontSize: '3rem', fontWeight: 800, lineHeight: 1.2, marginBottom: 16 }}>
             Password <br />
             <span style={{ color: 'var(--accent)' }}>Recovery</span>
