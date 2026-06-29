@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { MdEmail, MdLock, MdPerson, MdAdminPanelSettings } from 'react-icons/md';
+import { MdEmail, MdLock, MdPerson } from 'react-icons/md';
 import { useAuth } from '../context/AuthContext.jsx';
 import { useLang } from '../context/LanguageContext.jsx';
 import LanguageToggle from '../components/UI/LanguageToggle.jsx';
@@ -9,7 +9,7 @@ export default function Register() {
   const { register } = useAuth();
   const { t } = useLang();
   const navigate = useNavigate();
-  const [form, setForm] = useState({ name: '', email: '', password: '', confirmPassword: '', role: 'editor' });
+  const [form, setForm] = useState({ name: '', email: '', password: '', confirmPassword: '' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -22,7 +22,7 @@ export default function Register() {
     }
     setLoading(true);
     try {
-      await register(form.name, form.email, form.password, form.role);
+      await register(form.name, form.email, form.password);
       navigate('/');
     } catch (err) {
       setError(err.response?.data?.message || 'Registration failed');
@@ -55,25 +55,12 @@ export default function Register() {
         {error && <div className="alert alert-error">⚠️ {error}</div>}
 
         <form onSubmit={handleSubmit}>
-          <div className="form-row">
-            <div className="form-group">
-              <label className="form-label">{t('auth.name')}</label>
-              <div style={{ position: 'relative' }}>
-                <MdPerson style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)', fontSize: 18 }} />
-                <input id="reg-name" type="text" className="form-control" style={{ paddingLeft: 38 }}
-                  placeholder="Full Name" value={form.name} onChange={set('name')} required />
-              </div>
-            </div>
-            <div className="form-group">
-              <label className="form-label">{t('auth.role')}</label>
-              <div style={{ position: 'relative' }}>
-                <MdAdminPanelSettings style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)', fontSize: 18 }} />
-                <select id="reg-role" className="form-control" style={{ paddingLeft: 38 }} value={form.role} onChange={set('role')}>
-                  <option value="editor">Editor</option>
-                  <option value="viewer">Viewer</option>
-                  <option value="admin">Admin</option>
-                </select>
-              </div>
+          <div className="form-group">
+            <label className="form-label">{t('auth.name')}</label>
+            <div style={{ position: 'relative' }}>
+              <MdPerson style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)', fontSize: 18 }} />
+              <input id="reg-name" type="text" className="form-control" style={{ paddingLeft: 38 }}
+                placeholder="Full Name" value={form.name} onChange={set('name')} required />
             </div>
           </div>
 
