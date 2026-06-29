@@ -2,6 +2,10 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const path = require('path');
+const dns = require('dns');
+
+// Fix for Node 18+ fetch throwing "fetch failed" due to IPv6 preference on some PaaS like Render
+dns.setDefaultResultOrder('ipv4first');
 
 dotenv.config();
 
