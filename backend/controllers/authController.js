@@ -34,7 +34,12 @@ exports.register = async (req, res) => {
     const token = generateToken(user.id);
     res.status(201).json({ success: true, token, user: { ...user, _id: user.id } });
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    res.status(500).json({ 
+      success: false, 
+      message: error.message,
+      debugUrl: process.env.SUPABASE_URL ? process.env.SUPABASE_URL.substring(0, 20) + '...' : 'undefined',
+      cause: error.cause ? error.cause.message : 'no cause'
+    });
   }
 };
 
